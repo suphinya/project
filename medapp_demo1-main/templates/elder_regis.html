@@ -1,0 +1,163 @@
+{% include 'layout.html' %}
+{% include 'survey1.html' %}
+
+{% block content %}
+<!-- progress bar -->
+<div class="progress" style="height: 20px;">
+  <div class="progress-bar progress-bar-striped bg-success" role="progressbar" aria-label="Warning striped example"
+    style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+<div class="row align-items-center " style="height: 20px;"></div>
+
+
+
+<!-- survay -->
+<div class="row align-items-center fs-2 fw-bold " style="height: 80px;">
+  <div class="col  text-center text-black "> ประวัติส่วนตัว </div>
+</div>
+<p class="text-center text-black-50"> โปรดกรอกให้ครบทุกช่อง</p>
+
+<div class="row align-items-center " style="height: 20px;"></div>
+
+<form action="/elderly/register/2/" method="post">
+  {% csrf_token %}
+  <div class="mx-0 mx-sm-auto  ">
+    <div class="card w-75 m-auto">
+      <div class="modal-body mx-4 ">
+        <h4 class="text-center m-3 mb-4 "><strong>ข้อมูลของผู้สูงอายุ</strong></h4>
+
+        <div class="row align-items-start">
+          <div class="col">
+            <div class="form-group mb-4 text-start">
+              <label for="" ><strong>ชื่อ :</strong></label>
+              <!-- <input required type="text" class="form-control mt-3"  placeholder="เช่น สุภิญญา" name="elder_name"
+              value="{{name}}"> -->
+              <input  type="text" class="form-control mt-3"  placeholder="เช่น สุภิญญา" name="elder_name"
+              value="{{name}}">
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group mb-4 text-start" >
+              <label for="" ><strong>นามสกุล :</strong></label>
+              <!-- <input required type="text" class="form-control mt-3" placeholder="เช่น หวู" name="elder_surname"
+              value="{{surname}}"> -->
+              <input  type="text" class="form-control mt-3" placeholder="เช่น หวู" name="elder_surname"
+              value="{{surname}}">
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row align-items-start">
+          <div class="col">
+            <div class="form-group mb-4 text-start" >
+              <label for=""><strong>วันเกิด :</strong></label>
+              <!-- <input required type="date" class="form-control mt-3" name="birthday"
+              value="{{birthday}}"> -->
+              <input  type="date" class="form-control mt-3" name="birthday"
+              value="{{birthday}}">
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group mb-4 text-start" >
+              <label for=""><strong>เลขประจำตัวบัตรโรงพยาบาล :</strong></label>
+              <!-- <input required type="text" class="form-control mt-3" placeholder="กรุณาดูที่ช่อง HN. บนบัตร" name="elder_hNumber"
+              value="{{HN}}"> -->
+              <input  type="text" class="form-control mt-3" placeholder="กรุณาดูที่ช่อง HN. บนบัตร" name="elder_hNumber"
+              value="{{HN}}">
+            </div>
+          </div>
+        </div>
+
+        <div class="row align-items-start">
+          <div class="col">
+            <div class="form-group mb-4 text-start" >
+              <label for=""><strong>โรงพยาบาลที่ท่านรักษา :</strong></label>
+              <!-- <input required type="text" class="form-control mt-3" name="elder_hName" placeholder="เช่น โรงพยาบาลศิริราช"
+              value="{{hospital_name}}"> -->
+              <input  type="text" class="form-control mt-3" name="elder_hName" placeholder="เช่น โรงพยาบาลศิริราช"
+              value="{{hospital_name}}">
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group mb-4 text-start" >
+              <label for=""><strong>เบอร์โทรโรงพยาบาล :</strong></label>
+              <!-- <input required type="text" class="form-control mt-3" placeholder="เช่น 021234567" name="elder_hPhone"
+              value="{{hospital_phone}}"> -->
+              <input  type="text" class="form-control mt-3" placeholder="เช่น 021234567" name="elder_hPhone"
+              value="{{hospital_phone}}">
+            </div>
+          </div>
+        </div>
+
+      
+        <!-- ผู้ดูแล -->
+        <hr class="border border-dark bg-dark border-2 rounded-pill  w-75 m-auto mt-5 ">
+        <h4 class="text-center mt-4 mb-4 "><strong>ข้อมูลของผู้ติดต่อกรณีฉุกเฉิน</strong></h4>
+
+        <div class="row align-items-start">
+          <div class="col">
+            <div class="form-group mb-4 text-start" >
+              <label for=""><strong>ชื่อ :</strong></label>
+              <!-- <input required type="text" class="form-control mt-3" name="care_name" placeholder="เช่น อรภิญญา"
+              value="{{care_name}}"> -->
+              <input  type="text" class="form-control mt-3" name="care_name" placeholder="เช่น อรภิญญา"
+              value="{{care_name}}">
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group mb-4 text-start" >
+              <label for=""><strong>นามสกุล :</strong></label>
+              <!-- <input required type="text" class="form-control mt-3" placeholder="เช่น โภคหัตถโกศล" name="care_surname"
+              value="{{care_surname}}"> -->
+              <input  type="text" class="form-control mt-3" placeholder="เช่น โภคหัตถโกศล" name="care_surname"
+              value="{{care_surname}}">
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row align-items-start">
+          <div class="col">
+            <div class="form-group mb-4 text-start" >
+              <label for=""><strong>มีความเกี่ยวข้องเป็น :</strong></label>
+              <!-- <select required class="form-select mt-3" aria-label="Default select example" name="relation">
+                <option value="{{relation}}" selected>{{relation}}</option>
+                <option value="ลูก">ลูก</option>
+                <option value="หลาน">หลาน</option>
+                <option value="ญาติ">ญาติ</option>
+                <option value="พยาบาลส่วนตัว">พยาบาลส่วนตัว</option>
+                <option value="ผู้ดูแลทั่วไป">ผู้ดูแลทั่วไป</option>
+              </select> -->
+              <select  class="form-select mt-3" aria-label="Default select example" name="relation">
+                <option value="{{relation}}" selected>{{relation}}</option>
+                <option value="ลูก">ลูก</option>
+                <option value="หลาน">หลาน</option>
+                <option value="ญาติ">ญาติ</option>
+                <option value="พยาบาลส่วนตัว">พยาบาลส่วนตัว</option>
+                <option value="ผู้ดูแลทั่วไป">ผู้ดูแลทั่วไป</option>
+              </select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group mb-4 text-start" >
+              <label for=""><strong>เบอร์โทรติดต่อฉุกเฉิน :</strong></label>
+              <!-- <input required type="text" class="form-control mt-3" placeholder="เช่น 0812345678" name="care_phone"
+              value="{{care_phone}}"> -->
+              <input  type="text" class="form-control mt-3" placeholder="เช่น 0812345678" name="care_phone"
+              value="{{care_phone}}">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-footer text-end">
+        <input type="submit" value="ถัดไป" name="next" class="btn btn-primary">
+        <input type="button" onclick="window.location='/'" value="ยกเลิก" name="cancel" class="btn btn-dark">
+      </div>
+    </div>
+
+  </div>
+</form>
+
+{% endblock %}
