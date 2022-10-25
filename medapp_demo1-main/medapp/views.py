@@ -3,8 +3,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Elder
 from django.core.files.storage import FileSystemStorage
-# from .forms import ImageForm
-# from httpx import options
+import face_recognition
+import cv2
 
 # Create your views here.
 
@@ -30,9 +30,7 @@ physical_info = {
 mem = {
     "options" : '',
 }
-img_data = {
-    "crop_arr" : [],
-}
+
 
 # index test
 def home(request):
@@ -142,7 +140,7 @@ def elder_register5(request):
         return render(request, 'elder_regis4.html',mem)
     elif "next4" in request.POST :
         mem['options'] = request.POST['options']
-        return render(request, 'elder_regis5.html',img_data)
+        return render(request, 'elder_regis5.html')
     elif "cancel4" in request.POST :
         mem["options"] = ''
         return render(request, 'layout.html')
@@ -167,19 +165,24 @@ def save_elder_info(request):
             new_elder.relative_relation = elder_info['relation']
             new_elder.relative_phone = elder_info['care_phone']
             new_elder.disease = disease_info['disease_name']
-            new_elder.physical = physical_info
-            new_elder.memory = mem
+            new_elder.physical = physical_info['physical_name']
+            new_elder.memory = mem["options"]
             new_elder.image = request.FILES['picture']
-            # new_elder.face = None
-            # fs.url(filename)
-            new_elder.save() 
-        return render(request, 'layout.html')
+            
+            image = face_recognition.load_image_file(request.FILES['picture'])
+            # image_location = face_recognition.face_locations(image)
+            image_encoding = face_recognition.face_encodings(image)[0]
+            print(image_encoding)
+            print(type(image_encoding))
 
+            new_elder.face = image_encoding
+            new_elder.save() 
+
+        return render(request, 'layout.html')
     elif "cancel5" in request.POST :
-        img_data['crop_arr'] = ''
         return render(request, 'layout.html')
     else:
-        return render(request, 'elder_regis5.html',img_data)
+        return render(request, 'elder_regis5.html')
 
 def login(request):
     return render(request, 'login.html')

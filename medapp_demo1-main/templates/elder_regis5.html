@@ -23,7 +23,7 @@
     <form action="/elderly/register/summary/" method="POST" enctype="multipart/form-data">
       {% csrf_token %}
       <div class="modal-body m-4">
-        <input type="file" name="picture">
+        <input type="file" name="picture" required>
       </div>
       
       <div class="card-footer text-end">
