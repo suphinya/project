@@ -1,0 +1,115 @@
+{% include 'layout.html' %}
+{% include 'survey2.html' %}
+
+{% block content %}
+<!-- progress bar -->
+<div class="progress" style="height: 20px;">
+  <div class="progress-bar progress-bar-striped bg-success" role="progressbar" aria-label="Warning striped example"
+    style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+<div class="row align-items-center " style="height: 20px;"></div>
+
+<!-- survay -->
+<div class="row align-items-center fs-2 fw-bold " style="height: 80px;">
+  <div class="col  text-center text-black "> ปัญหาทางสภาพร่างกาย </div>
+</div>
+<p class="text-center text-black-50"> เลือกได้มากกว่า 1 อย่าง </p>
+
+<div class="row align-items-center " style="height: 20px;"></div>
+
+<form action="/elderly/register/4/" method="post">
+  {% csrf_token %}
+  <div class="mx-0 mx-sm-auto  ">
+    <div class="card w-75 m-auto ">
+
+      <div class="modal-body m-4">
+        <!-- body in survey -->
+
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+
+          <div class="col">
+            <div class="card border-0">
+              <input type="checkbox" class="btn-check" name="physical1" id="physical1" autocomplete="off" value="ภาวะความจำเสื่อม">
+              <label class="btn btn-outline-warning" for="physical1">
+                <img src="https://cdn-icons-png.flaticon.com/512/2176/2176938.png" class="rounded "
+                  style="width: 55px;height: 55px;">
+                <br>ภาวะความจำเสื่อม
+              </label>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card border-0">
+              <input type="checkbox" class="btn-check" name="physical2" id="physical2" autocomplete="off" value="เห็นไม่ชัด/ตามัว">
+              <label class="btn btn-outline-warning" for="physical2">
+                <img src="https://cdn-icons-png.flaticon.com/512/822/822102.png" class="rounded "
+                  style="width: 55px;height: 55px;">
+                <br>เห็นไม่ชัด/ตามัว
+              </label>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card border-0">
+              <input type="checkbox" class="btn-check" name="physical3" id="physical3" autocomplete="off" value="เคลื่อนไหวไม่คล่อง">
+              <label class="btn btn-outline-warning" for="physical3">
+                <img src="https://cdn-icons-png.flaticon.com/512/3160/3160277.png" class="rounded "
+                  style="width: 55px;height: 55px;">
+                <br>เคลื่อนไหวไม่คล่อง
+              </label>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card border-0">
+              <input type="checkbox" class="btn-check" name="physical4" id="physical4" autocomplete="off" value="ได้ยินไม่ชัดเจน">
+              <label class="btn btn-outline-warning" for="physical4">
+                <img src="https://cdn-icons-png.flaticon.com/512/508/508740.png" class="rounded "
+                  style="width: 55px;height: 55px;">
+                <br>ได้ยินไม่ชัดเจน
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="card-footer text-end">
+        <input type="button" value="ย้อนกลับ" name="back3" class="btn btn-primary"
+          onclick="window.location='/elderly/register/2/'">
+        <input type="submit" value="ถัดไป" name="next3" class="btn btn-primary">
+        <input type="button" onclick="window.location='/'" value="ยกเลิก" name="cancel3" class="btn btn-dark">
+      </div>
+
+      <script>
+        // ถ้าเกิดเป็นโรคที่มีในตัวเลือก
+        all_box = ['physical1','physical2','physical3','physical4'];
+        all_box_data = ['ภาวะความจำเสื่อม', 'เห็นไม่ชัด/ตามัว', 'เคลื่อนไหวไม่คล่อง', 'ได้ยินไม่ชัดเจน']
+        para_choice = '{{physical_name}}'; // [&#x27;โรคความดันโลหิตสูง&#x27;, &#x27;โรคเบาหวาน&#x27;] 
+        console.log(para_choice);
+        // replace and split word
+        para_choice = para_choice.replaceAll('[', '')
+        para_choice = para_choice.replaceAll(']', '')
+        para_choice = para_choice.replaceAll('&#x27;', '')
+        para_choice = para_choice.replaceAll(' ', '')
+        console.log(para_choice);
+
+        list_para = [];
+        list_para = para_choice.split(",");
+        console.log(list_para);
+
+        // function check ถ้าเกิดเป็นโรคที่มีในตัวเลือก
+        for (var i = 0; i < list_para.length; i++) {
+          for (var j = 0; j < all_box.length; j++) {
+            box_physical = document.getElementById(all_box[j]);
+            if (list_para[i] == all_box_data[j]) {
+              box_physical.checked = true;
+            }
+          }
+        }
+      </script>
+
+    </div>
+  </div>
+</form>
+{% endblock %}
